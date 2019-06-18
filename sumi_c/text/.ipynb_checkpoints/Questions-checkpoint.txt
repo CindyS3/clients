@@ -1,0 +1,61 @@
+Question 1:
+
+You work for a surveying company and your manager wishes to find the length of a river
+
+(see picture).
+
+ 
+
+As you examine the river, you notice that a particular oddity manifests. From a very general
+view, the river looks like a curve. However, as you zoom in and take a closer and closer look,
+you see that the river has ridges and nooks. As you magnify further you see that the ridges
+
+and nooks have smaller ridges and nooks of their own (see picture).
+
+——- ———— ee
+
+ 
+
+-— -_—s-.. = =o ses aes &
+
+A competing surveying company has already estimated the length by using the river's
+center-line, but your manager wants you to find a more accurate method to attract clients.
+Describe an idea or method that would find the closest approximation of the length of the
+
+river.Question 2:
+
+You work for a shipping company and your manager receives orders from various custom-
+ers (some existing, some new) every day. Your manager wishes to establish a process to
+
+automate tracking the orders.
+
+The data arrives exactly in this format:
+
+day_i = [“Bob: 1200”, “Alice: 2500”, “Celia: 110”, etc...]
+
+Write a script that, when given the daily data, will keep track of the total order amount pur-
+
+chased by each customer. Your output should ideally look like:
+
+Customer Total Purchase
+
+Alice 100
+Bob 120
+Celia 110
+
+Question 3:
+
+You work for a psychic. Unfortunately, the psychic is not very good at reading people’s
+
+minds. The psychic has hired you to write a script to find a number that her client is think-
+
+ing of. The script should take an arbitrary range of numbers provided by the client. Your
+script should use the minimum number of guesses to find the number that the client is
+
+thinking of. The correct number will always be within the range of numbers provided by
+
+the client.
+
+The only input the user can give is the range of numbers and they can answer “yes” or “no”
+
+to any question asked. Write the script to perform this task.

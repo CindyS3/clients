@@ -1,0 +1,286 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%pylab inline\n",
+    "import pandas as pd\n",
+    "\n",
+    "day_i = [\"Bob: 1200\", \"Alice: 2500\", \"Celia: 110\"]\n",
+    "\n",
+    "df = pd.DataFrame.from_dict(dict([i.split(': ') for i in day_i]), orient='index')\n",
+    "df = df.reset_index()\n",
+    "df.columns = ['Customer', 'Total Purchase']\n",
+    "df['Total Purchase'] = df['Total Purchase'].apply(int)\n",
+    "df\n",
+    "\n",
+    "np.array([i.split(': ') for i in day_i])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\"\"\"Matt's Solution for Question 3: (Use your own, it's cooler.)\"\"\"\n",
+    "\n",
+    "g_meta_hist = []\n",
+    "for i in range(100):\n",
+    "    #Create random range and secret number within range:\n",
+    "    ns = sorted(np.random.randint(0,10000,20))\n",
+    "    low = ns[0]\n",
+    "    high = ns[-1]\n",
+    "    number = np.random.randint(low, high)\n",
+    "    #print(low, high, number)\n",
+    "\n",
+    "    #Binary search for guess:\n",
+    "    guess_history = []\n",
+    "    guess = int(np.mean([low,high]))\n",
+    "    guesses = 1\n",
+    "    while guess != number:\n",
+    "        if guess < number:\n",
+    "            low = guess\n",
+    "            guess = int(np.mean([low,high]))\n",
+    "        if guess > number:\n",
+    "            high = guess\n",
+    "            guess = int(np.mean([low,high]))\n",
+    "        guesses += 1\n",
+    "        guess_history.append(guess)\n",
+    "        #print(guesses, '|', guess)\n",
+    "    #plt.plot(guess_history)\n",
+    "    g_meta_hist.append(len(guess_history))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "8.66"
+      ]
+     },
+     "execution_count": 56,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.mean(g_meta_hist)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\"\"\"Question 2:\"\"\"\n",
+    "\n",
+    "#Examples (this cell)\n",
+    "day_i = [\"Bob: 1200\", \"Alice: 2500\", \"Celia: 110\"]\n",
+    "\n",
+    "[x**2 for x in range(5)]\n",
+    "\n",
+    "s1 = day_i[0]\n",
+    "\n",
+    "s1.split(': ')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Customer</th>\n",
+       "      <th>Total Purchase</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Bob</td>\n",
+       "      <td>1200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Alice</td>\n",
+       "      <td>2500</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Celia</td>\n",
+       "      <td>110</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Matt</td>\n",
+       "      <td>5</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  Customer Total Purchase\n",
+       "0      Bob           1200\n",
+       "1    Alice           2500\n",
+       "2    Celia            110\n",
+       "3     Matt              5"
+      ]
+     },
+     "execution_count": 44,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#Implementation:\n",
+    "day_i = [\"Bob: 1200\", \"Alice: 2500\", \"Celia: 110\", \"Matt: 5\"]\n",
+    "\n",
+    "d = dict([s.split(': ') for s in day_i])\n",
+    "\n",
+    "#https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.from_dict.html\n",
+    "df = pd.DataFrame.from_dict(d, orient='index')\n",
+    "df = df.reset_index()\n",
+    "df.columns = ['Customer', 'Total Purchase']\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>col_1</th>\n",
+       "      <th>col_2</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>3</td>\n",
+       "      <td>a</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2</td>\n",
+       "      <td>b</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>1</td>\n",
+       "      <td>c</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>0</td>\n",
+       "      <td>d</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   col_1 col_2\n",
+       "0      3     a\n",
+       "1      2     b\n",
+       "2      1     c\n",
+       "3      0     d"
+      ]
+     },
+     "execution_count": 47,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#Example of default from_dict behavior:\n",
+    "pd.DataFrame.from_dict({'col_1': [3, 2, 1, 0], 'col_2': ['a', 'b', 'c', 'd']})"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.1"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
